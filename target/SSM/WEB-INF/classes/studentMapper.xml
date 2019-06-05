@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--普通方式这里填该xml文件的包名，接口方法要将这里的namespace改为接口的包名-->
+<mapper namespace="com.mapper.StudentMapper">
+
+    <select id="queryStudentById"  parameterType="int" resultType="com.entity.Student">
+      select * from student where id = #{id}
+    </select>
+
+    <insert id="addStudent" parameterType="com.entity.Student">
+        insert into student() values(#{id},#{name},#{sex},#{classid})
+    </insert>
+
+    <select id="queryAllStudent" resultType="com.entity.Student">
+      select * from student
+    </select>
+
+</mapper>

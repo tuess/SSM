@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+        default-autowire="byName">
+
+    <!--配置扫描器（为了注解的使用-->
+    <context:component-scan base-package="com.service,com.entity,com.controller,com.mapper"/>
+
+    <!--spring整合mybatis，需要数据源，mapper.xml-->
+    <!--加载db.properties文件-->
+    <bean id="config" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="locations">
+            <array>
+                <value>classpath:db.properties</value>
+            </array>
+        </property>
+    </bean>
+
+    <!--配置数据库信息（替代mybatis的conf.xml文件）-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+
+    <!--加载mapper.xml，在SpringIOC容器中创建Mybatis的核心类SqlSessionFactory，最后再把其交给spring管理-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--配置数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--加载mapper.xml路径-->
+        <property name="mapperLocations" value="classpath:com/mapper/*.xml"/>
+    </bean>
+
+    <bean id="mappers" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--指定批量产生那个包的mapper对象,将com.mapper包中，所有的接口产生与之对应的动态代理对象（对象名就是首字母小写的接口名）-->
+        <property name="basePackage" value="com.mapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <!-- 依赖注入：给service注入dao -->
+<!--    <bean id="studentService" class="com.service.impl.StudentServiceImpl">
+        <property name="studentMapper" ref="studentMapper"/>
+    </bean>-->
+
+<!--    <bean id="studentController" class="com.controller.StudentController">
+        <property name="studentService" ref="studentService"/>
+    </bean>-->
+
+</beans>
