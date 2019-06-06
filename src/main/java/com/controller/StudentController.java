@@ -36,4 +36,12 @@ public class StudentController {
         map.put("students",students);
         return "queryAllStudent";
     }
+
+    @RequestMapping("addStudent")
+    public String addStudent(Map<String,Object> map){
+        Student student = new Student(10012,"小龙","男",2);
+        studentService.addStudent(student);
+        map.put("flag",true);
+        return "redirect:/index.jsp";
+    }
 }

@@ -4,5 +4,9 @@
 <h2>Hello World!</h2>
 <a href="controller/queryStudentById/10001">查询1号学生</a>
 <a href="controller/queryAllStudent">查询全部学生</a>
+<a href="controller/addStudent">添加一位学生</a>
+<%
+request.getParameter("flag");
+%>
 </body>
 </html>

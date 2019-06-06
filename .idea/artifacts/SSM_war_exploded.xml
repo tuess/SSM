@@ -33,7 +33,6 @@
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.15" />
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.6.1" />
           <element id="library" level="project" name="Maven: javax.servlet.jsp.jstl:jstl-api:1.2" />
-          <element id="library" level="project" name="Maven: org.glassfish.web:jstl-impl:1.2" />
         </element>
       </element>
       <element id="directory" name="META-INF">

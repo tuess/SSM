@@ -27,7 +27,7 @@ public class StudentServiceImpl implements IStudentService {
 
     @Override
     public void addStudent(Student student) {
-
+        studentMapper.addStudent(student);
     }
 
     @Override
